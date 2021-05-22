@@ -135,6 +135,7 @@
 (general-define-key
  "C-M-j" 'counsel-switch-buffer)
 
+;; Put listed modes into evil emacs mode (normal emacs mode)
 (defun md/evil-hook ()
   (dolist (mode '(custom-mode
 		  eshell-mode
@@ -149,7 +150,7 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t) ;; replaces universal argument key binding
   (setq evil-want-C-i-jump nil)
-  :config
+  :config 
   (add-hook 'evil-mode-hook 'md/evil-hook)
   (evil-mode)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)

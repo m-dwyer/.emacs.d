@@ -163,3 +163,9 @@
   
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
+
+;; evil mode configurations for different emacs modes
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))

@@ -1,4 +1,4 @@
-# emacs
+# .emacs.d
 My emacs config
 
 ## What

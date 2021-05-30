@@ -228,6 +228,15 @@
 
 (setq org-hide-emphasis-markers t)
 
+(defun md/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+	visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :defer t
+  :hook (org-mode . md/org-mode-visual-fill))
+
 (defun md/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)

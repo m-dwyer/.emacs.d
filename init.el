@@ -237,4 +237,5 @@
   :pin org ;; TODO - check
   :hook (org-mode . md/org-mode-setup)
   :config
+  (setq org-ellipsis " ▾")
   (md/org-font-setup))

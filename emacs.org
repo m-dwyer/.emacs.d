@@ -2,6 +2,7 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
 * Overview
+
 This is my first attempt at building my own personal literate Emacs config using org-mode.  I aim to keep this repository up to date as I discover packages,  tips, tricks, snippets etc to add to my own personal  workflow -- which is undergoing development.
 
 * Installation:
@@ -9,7 +10,6 @@ This is my first attempt at building my own personal literate Emacs config using
 #+begin_src
 M-x org-babel-tangle
 #+end_src
-
 
 * Package Setup
 
@@ -61,6 +61,7 @@ M-x org-babel-tangle
 #+end_src
 
 ** Font Configuration
+
 #+begin_src emacs-lisp
   ;; Font
   (set-face-attribute 'default nil :font "Fira Mono" :height 140)
@@ -130,6 +131,7 @@ M-x org-babel-tangle
 #+end_src
 
 * UI Configuration
+
 ** Theme
 
 #+begin_src emacs-lisp
@@ -294,6 +296,7 @@ M-x org-babel-tangle
 #+end_src
 
 * Development
+
 ** Rainbow delimiters
 
 #+begin_src emacs-lisp

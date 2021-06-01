@@ -29,7 +29,7 @@
 
 ;; Line numbers
 (column-number-mode)
-(global-display-line-numbers-mode
+(global-display-line-numbers-mode)
 
 
  ;; Disable line numbers for some modes

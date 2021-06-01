@@ -32,12 +32,15 @@
 (global-display-line-numbers-mode)
 
 
- ;; Disable line numbers for some modes
- (dolist (mode '(org-mode-hook
-                 term-mode-hook
-                 eshell-mode-hook
-                 shell-mode-hook))
-   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                eshell-mode-hook
+                shell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Replace yes/no prompts with y/n
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Font
 (set-face-attribute 'default nil :font "Fira Mono" :height 140)

@@ -237,15 +237,20 @@
   :pin org ;; TODO - check
   :hook (org-mode . md/org-mode-setup)
   :config
+
+  ;; My org file locations
+  (setq md--org-projects-dir (expand-file-name "projects" org-directory))
+  (setq md--org-templates (expand-file-name "templates" org-directory))
+  (setq md--org-project-template (expand-file-name "project.org" md--org-templates))
+  (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
+
   (setq org-ellipsis " ▾")
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files '("~/org/Tasks.org"))
+  (setq org-agenda-files '(md--org-tasks))
   (md/org-font-setup))
-
-(setq md--org-projects-dir (expand-file-name "projects" org-directory))
 
 (defun md/get-project-name ()
   (setq md--org-capture-project (read-string "Project name:"))
@@ -254,10 +259,10 @@
 
 (setq org-capture-templates
       `(("t" "Tasks / Projects")
-        ("tt" "Task" entry (file "~/org/tasks.org")
+        ("tt" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
         ("tp" "Project" entry (file md/get-project-name)
-         (file "~/org/templates/project.org"))))
+         (file md--org-project-template))))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

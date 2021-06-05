@@ -258,11 +258,11 @@
    (format "%s.org" (s-snake-case md--org-capture-project)) md--org-projects-dir))
 
 (setq org-capture-templates
-      `(("t" "Tasks / Projects")
-        ("tt" "Task" entry (file+headline md--org-tasks "Tasks")
-         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
-        ("tp" "Project" entry (file md/get-project-name)
-         (file ,md--org-project-template))))
+      `(("p" "Projects")
+        ("pp" "Project" entry (file md/get-project-name)
+         (file ,md--org-project-template))
+        ("t" "Task" entry (file+headline md--org-tasks "Tasks")
+         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

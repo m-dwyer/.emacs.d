@@ -15,6 +15,15 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; for string utils
+(use-package s)
+
+;; Keep things clean
+(use-package no-littering
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1) ; Disable visible scrollbar
@@ -234,6 +243,20 @@
   (setq org-log-into-drawer t)
   (setq org-agenda-files '("~/org/Tasks.org"))
   (md/org-font-setup))
+
+(setq md--org-projects-dir (expand-file-name "projects" org-directory))
+
+(defun md/get-project-name ()
+  (setq md--org-capture-project (read-string "Project name:"))
+  (expand-file-name
+   (format "%s.org" (s-snake-case md--org-capture-project)) md--org-projects-dir))
+
+(setq org-capture-templates
+      `(("t" "Tasks / Projects")
+        ("tt" "Task" entry (file "~/org/tasks.org")
+         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+        ("tp" "Project" entry (file md/get-project-name)
+         (file "~/org/templates/project.org"))))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

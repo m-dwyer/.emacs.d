@@ -140,6 +140,7 @@
 ;; TODO: investigate :diminish, to remove minor-mode for ivy from the modeline!
 (use-package ivy
   :diminish
+  :bind (("C-s" . swiper))
   :config
   (ivy-mode 1))
 

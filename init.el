@@ -249,7 +249,7 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files '(md--org-tasks))
+  (setq org-agenda-files `(,md--org-tasks))
   (md/org-font-setup))
 
 (defun md/get-project-name ()

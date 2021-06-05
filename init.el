@@ -249,7 +249,7 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files `(,md--org-tasks))
+  (setq org-agenda-files `(,md--org-tasks ,md--org-projects-dir))
   (md/org-font-setup))
 
 (defun md/get-project-name ()
@@ -262,7 +262,7 @@
         ("tt" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
         ("tp" "Project" entry (file md/get-project-name)
-         (file md--org-project-template))))
+         (file ,md--org-project-template))))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

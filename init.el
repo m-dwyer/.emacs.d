@@ -244,6 +244,7 @@
   (setq md--org-templates (expand-file-name "templates" org-directory))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
+  (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
 
   (setq org-ellipsis " ▾")
 
@@ -254,39 +255,39 @@
   (md/org-font-setup))
 
 (defun md/get-project-name ()
-  (setq md--org-capture-project (read-string "Project name:"))
-  (expand-file-name
-   (format "%s.org" (s-snake-case md--org-capture-project)) md--org-projects-dir))
+    (setq md--org-capture-project (read-string "Project name:"))
+    (expand-file-name
+     (format "%s.org" (s-snake-case md--org-capture-project)) md--org-projects-dir))
 
-(setq org-capture-templates
-      `(("p" "Projects")
-        ("pp" "Project" entry (file md/get-project-name)
-         (file ,md--org-project-template))
-        ("t" "Task" entry (file+headline md--org-tasks "Tasks")
-         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
+  (setq org-capture-templates
+        `(("p" "Projects")
+          ("pp" "Project" entry (file md/get-project-name)
+           (file ,md--org-project-template))
+          ("t" "Task" entry (file+headline md--org-tasks "Tasks")
+           "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
 
-;; Save org buffers after refiling
-(advice-add 'org-refile :after 'org-save-all-org-buffers)
+  ;; Save org buffers after refiling
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-;; From https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/
-(defun md/org-refile (file headline &optional arg)
-  (let ((pos (save-excursion
-               (find-file file)
-               (org-find-exact-headline-in-buffer headline))))
-    (org-refile arg nil (list headline file nil pos)))
-  (switch-to-buffer (current-buffer)))
+  ;; From https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/
+  (defun md/org-refile (file headline &optional arg)
+    (let ((pos (save-excursion
+                 (find-file file)
+                 (org-find-exact-headline-in-buffer headline))))
+      (org-refile arg nil (list headline file nil pos)))
+    (switch-to-buffer (current-buffer)))
 
-;; Refiling operations for processing the inbox
-(defhydra hydra-org-refiler ()
-  ("<up>" org-previous-visible-heading "prev")
-  ("<down>" org-next-visible-heading "next")
-  ("k" org-previous-visible-heading "prev")
-  ("j" org-next-visible-heading "next")
-  ("t" (md/org-refile "tasks.org" "Tasks") "Tasks")
-  ("i" (md/org-refile "incubate.org" "Incubate") "Incubate"))
+  ;; Refiling operations for processing the inbox
+  (defhydra hydra-org-refiler ()
+    ("<up>" org-previous-visible-heading "prev")
+    ("<down>" org-next-visible-heading "next")
+    ("k" org-previous-visible-heading "prev")
+    ("j" org-next-visible-heading "next")
+    ("t" (md/org-refile (file 'md--org-tasks) "Tasks") "Tasks")
+    ("i" (md/org-refile (file 'md--org-incubate) "Incubate") "Incubate"))
 
-(md/leader-keys
-  "r" '(hydra-org-refiler/body :which-key "refile"))
+  (md/leader-keys
+    "r" '(hydra-org-refiler/body :which-key "refile"))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

@@ -265,6 +265,9 @@
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
 
+;; Save org buffers after refiling
+(advice-add 'org-refile :after 'org-save-all-org-buffers)
+
 ;; From https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/
 (defun md/org-refile (file headline &optional arg)
   (let ((pos (save-excursion

@@ -71,6 +71,7 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
   (md/leader-keys
+    "r" '(:ignore t :which-key "refile")
     "t" '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")))
 
@@ -263,6 +264,26 @@
          (file ,md--org-project-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
          "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
+
+;; From https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/
+(defun md/org-refile (file headline &optional arg)
+  (let ((pos (save-excursion
+               (find-file file)
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile arg nil (list headline file nil pos)))
+  (switch-to-buffer (current-buffer)))
+
+;; Refiling operations for processing the inbox
+(defhydra hydra-org-refiler ()
+  ("<up>" org-previous-visible-heading "prev")
+  ("<down>" org-next-visible-heading "next")
+  ("k" org-previous-visible-heading "prev")
+  ("j" org-next-visible-heading "next")
+  ("t" (md/org-refile "tasks.org" "Tasks") "Tasks")
+  ("i" (md/org-refile "incubate.org" "Incubate") "Incubate"))
+
+(md/leader-keys
+  "r" '(hydra-org-refiler/body :which-key "refile"))
 
 ;; Rainbow delimiters!
 (use-package rainbow-delimiters

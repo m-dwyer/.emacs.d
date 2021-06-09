@@ -24,6 +24,9 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
+;; Reload buffer when file changes on disk
+(global-auto-revert-mode 1)
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1) ; Disable visible scrollbar

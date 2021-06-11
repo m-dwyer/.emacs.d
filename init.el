@@ -27,6 +27,10 @@
 ;; Reload buffer when file changes on disk
 (global-auto-revert-mode 1)
 
+;; Windmove for moving windows with Shift + arrow keys, rather than C-x o
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1) ; Disable visible scrollbar

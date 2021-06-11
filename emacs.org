@@ -46,6 +46,11 @@ M-x org-babel-tangle
 
   ;; Reload buffer when file changes on disk
   (global-auto-revert-mode 1)
+
+  ;; Windmove for moving windows with Shift + arrow keys, rather than C-x o
+  (when (fboundp 'windmove-default-keybindings)
+    (windmove-default-keybindings))
+
 #+end_src
 
 * Basic UI Configuration

@@ -399,7 +399,9 @@ M-x org-babel-tangle
 #+end_src
 
 * Workflow
+
 ** Task management
+
 #+begin_src emacs-lisp
 
   ;; Move things into drawer

@@ -397,3 +397,14 @@ M-x org-babel-tangle
     :ensure t
     :init (global-flycheck-mode))
 #+end_src
+
+* Workflow
+** Task management
+#+begin_src emacs-lisp
+
+  ;; Move things into drawer
+  (setq org-log-into-drawer t)
+
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+#+end_src

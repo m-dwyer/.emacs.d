@@ -11,7 +11,9 @@ This is my first attempt at building my own personal literate Emacs config using
 M-x org-babel-tangle
 #+end_src
 
-* Package Setup
+* Packages
+
+** Package Setup
 
 #+begin_src emacs-lisp
   ;; Initialize package sources
@@ -30,6 +32,19 @@ M-x org-babel-tangle
 
   (require 'use-package)
   (setq use-package-always-ensure t)
+    #+end_src
+
+** Package Auto Update
+
+#+begin_src emacs-lisp
+  (use-package auto-package-update
+    :custom
+    (auto-package-update-interval 7)
+    (auto-package-update-prompt-before-update t)
+    (auto-package-update-hide-results t)
+    :config
+    (auto-package-update-maybe)
+    (auto-package-update-at-time "09:00"))
 #+end_src
 
 * General
@@ -403,7 +418,6 @@ M-x org-babel-tangle
 ** Task management
 
 #+begin_src emacs-lisp
-
   ;; Move things into drawer
   (setq org-log-into-drawer t)
 

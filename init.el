@@ -354,4 +354,5 @@
                 ((org-agenda-overriding-header "Next Tasks")))))
         ("e" "Low Effort" tags-todo "+TODO=\"NEXT\"+Effort<=15&+Effort>0"
          ((org-agenda-overriding-header "Low Effort Tasks")
-          (org-agenda-max-todos 20)))))
+          (org-agenda-max-todos 20)))
+        ("W" "Work Tasks" tags-todo "+@work")))

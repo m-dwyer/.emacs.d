@@ -321,10 +321,12 @@
   :init (global-flycheck-mode))
 
 ;; Move things into drawer
-(setq org-log-into-drawer t)
+  (setq org-log-into-drawer t)
 
-;; Ensure any TODO dependencies are met
-(setq set-enforce-todo-dependencies t)
+  ;; Ensure any TODO dependencies are met
+  (setq set-enforce-todo-dependencies t)
 
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+
+  (setq org-tags-exclude-from-inheritance '("project"))

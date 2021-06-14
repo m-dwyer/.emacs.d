@@ -32,7 +32,7 @@ M-x org-babel-tangle
 
   (require 'use-package)
   (setq use-package-always-ensure t)
-    #+end_src
+#+end_src
 
 ** Package Auto Update
 
@@ -419,7 +419,7 @@ M-x org-babel-tangle
 ** Task management
 
 #+begin_src emacs-lisp
-  ;; Move things into drawer
+;; Move things into drawer
   (setq org-log-into-drawer t)
 
   ;; Ensure any TODO dependencies are met
@@ -427,4 +427,6 @@ M-x org-babel-tangle
 
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+
+  (setq org-tags-exclude-from-inheritance '("project"))
 #+end_src

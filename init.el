@@ -272,7 +272,7 @@
 (defun md/get-project-name ()
   (setq md--org-capture-project (read-string "Project name:"))
   (expand-file-name
-   (format "%s.org" (s-snake-case md--org-capture-project)) md--org-projects-dir))
+   (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
 
 (setq org-capture-templates
       `(("p" "Projects")

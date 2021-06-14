@@ -416,12 +416,15 @@ M-x org-babel-tangle
 
 * Workflow
 
-** Task management
-
 #+begin_src emacs-lisp
-;; Move things into drawer
+  ;; Move things into drawer
   (setq org-log-into-drawer t)
 
+  ;; Show log of tasks
+  ;;(setq org-agenda-start-with-log-mode t)
+
+  ;; Log timestamp when task done
+  (setq org-log-done 'time)
   ;; Ensure any TODO dependencies are met
   (setq set-enforce-todo-dependencies t)
 
@@ -429,4 +432,10 @@ M-x org-babel-tangle
         '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
 
   (setq org-tags-exclude-from-inheritance '("project"))
+
+  ;; Show actionable tasks
+  (setq org-agenda-custom-commands
+        '(("n" "Next Tasks"
+           ((todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))))
 #+end_src

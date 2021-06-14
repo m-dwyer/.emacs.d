@@ -321,12 +321,23 @@
   :init (global-flycheck-mode))
 
 ;; Move things into drawer
-  (setq org-log-into-drawer t)
+(setq org-log-into-drawer t)
 
-  ;; Ensure any TODO dependencies are met
-  (setq set-enforce-todo-dependencies t)
+;; Show log of tasks
+;;(setq org-agenda-start-with-log-mode t)
 
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+;; Log timestamp when task done
+(setq org-log-done 'time)
+;; Ensure any TODO dependencies are met
+(setq set-enforce-todo-dependencies t)
 
-  (setq org-tags-exclude-from-inheritance '("project"))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+
+(setq org-tags-exclude-from-inheritance '("project"))
+
+;; 
+(setq org-agenda-custom-commands
+      '(("n" "Next Tasks"
+         ((todo "NEXT"
+                ((org-agenda-overriding-header "Next Tasks")))))))

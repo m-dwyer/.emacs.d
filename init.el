@@ -304,6 +304,7 @@
   ("i" (md/org-refile md--org-incubate "Incubate") "Incubate"))
 
 (md/leader-keys
+  "c" '(org-capture :which-key "capture")
   "r" '(hydra-org-refiler/body :which-key "refile"))
 
 ;; Rainbow delimiters!

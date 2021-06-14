@@ -336,8 +336,12 @@
 
 (setq org-tags-exclude-from-inheritance '("project"))
 
-;; 
+;; Show actionable tasks
 (setq org-agenda-custom-commands
       '(("n" "Next Tasks"
          ((todo "NEXT"
+                ((org-agenda-overriding-header "Next Tasks")))))
+        ("d" "Dashboard"
+         ((agenda "" ((org-deadline-warning-days 7)))
+          (todo "NEXT"
                 ((org-agenda-overriding-header "Next Tasks")))))))

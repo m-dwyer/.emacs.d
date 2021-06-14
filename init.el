@@ -329,7 +329,7 @@
 ;; Log timestamp when task done
 (setq org-log-done 'time)
 ;; Ensure any TODO dependencies are met
-(setq set-enforce-todo-dependencies t)
+(setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))

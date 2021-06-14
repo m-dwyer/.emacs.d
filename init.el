@@ -344,4 +344,6 @@
         ("d" "Dashboard"
          ((agenda "" ((org-deadline-warning-days 7)))
           (todo "NEXT"
-                ((org-agenda-overriding-header "Next Tasks")))))))
+                ((org-agenda-overriding-header "Next Tasks")))))
+        ("e" "Low Effort" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+         ((org-agenda-overriding-header "Low Effort Tasks")))))

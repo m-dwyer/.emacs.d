@@ -336,6 +336,14 @@
 
 (setq org-tags-exclude-from-inheritance '("project"))
 
+(setq org-tag-alist
+      '(("@errand" .?E)
+        ("@home" . ?H)
+        ("@work" . ?W)
+        ("idea" . ?i)
+        ("note" .?n)))
+
+
 ;; Show actionable tasks
 (setq org-agenda-custom-commands
       '(("n" "Next Tasks"

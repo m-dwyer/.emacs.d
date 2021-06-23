@@ -1,0 +1,10 @@
+#+TITLE: Tasks
+
+* Purpose
+Collection of logged one-off tasks that do not belong to a partcular project
+
+* Tasks
+** NEXT Example task
+:PROPERTIES:
+:Effort:   1h
+:END:

@@ -257,8 +257,10 @@
   :config
 
   ;; My org file locations
+
+  (setq md--org-templates (expand-file-name "templates" user-emacs-directory))
+
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
-  (setq md--org-templates (expand-file-name "templates" org-directory))
   (setq md--org-project-template (expand-file-name "project.org" md--org-templates))
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
@@ -330,6 +332,7 @@
 
 ;; Log timestamp when task done
 (setq org-log-done 'time)
+
 ;; Ensure any TODO dependencies are met
 (setq org-enforce-todo-dependencies t)
 

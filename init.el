@@ -375,12 +375,19 @@
           (org-agenda-max-todos 20)))
         ("W" "Work Tasks" tags-todo "+@work")))
 
-(use-package org-journal
-  :ensure t
-  :defer t
-  :init
-  (setq org-journal-prefix-key "C-c C-j ")
+(use-package org-edna
   :config
-  (setq org-journal-dir md--org-journal-dir)
-  (setq org-journal-date-format "%A, %d %B %Y")
-  (setq org-journal-file-format "%Y-W%V.org"))
+  (require 'org-edna)
+  (org-edna-mode)
+  (setq org-edna-use-inheritance t))
+
+;; Breaks org capture templates
+;;  (use-package org-journal
+;;    :ensure t
+;;    :defer t
+;;    :init
+;;    (setq org-journal-prefix-key "C-c C-j ")
+;;    :config
+;;    (setq org-journal-dir md--org-journal-dir)
+;;    (setq org-journal-date-format "%A, %d %B %Y")
+;;    (setq org-journal-file-format "%Y-W%V.org"))

@@ -328,10 +328,14 @@ M-x org-babel-tangle
     (visual-line-mode 1))
 
   (use-package org
-    :pin org ;; TODO - check
+    :ensure t
     :hook (org-mode . md/org-mode-setup)
+    :bind
+    ("C-c l" . 'org-store-link)
+    ("C-c a" . 'org-agenda)
+    ("C-c c" . 'org-capture)
+    ("C-c t" . 'org-todo)
     :config
-
     ;; My org file locations
 
     (setq md--org-templates (expand-file-name "templates" user-emacs-directory))
@@ -340,6 +344,7 @@ M-x org-babel-tangle
     (setq md--org-project-template (expand-file-name "project.org" md--org-templates))
     (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
     (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
+    (setq md--org-journal-dir (expand-file-name "journal" org-directory))
 
     (setq org-ellipsis " ▾")
 
@@ -458,4 +463,14 @@ M-x org-babel-tangle
            ((org-agenda-overriding-header "Low Effort Tasks")
             (org-agenda-max-todos 20)))
           ("W" "Work Tasks" tags-todo "+@work")))
+
+  (use-package org-journal
+    :ensure t
+    :defer t
+    :init
+    (setq org-journal-prefix-key "C-c C-j ")
+    :config
+    (setq org-journal-dir md--org-journal-dir)
+    (setq org-journal-date-format "%A, %d %B %Y")
+    (setq org-journal-file-format "%Y-W%V.org"))
 #+end_src

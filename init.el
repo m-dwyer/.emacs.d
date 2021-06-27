@@ -350,7 +350,7 @@
 (setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")))
 
 (setq org-tags-exclude-from-inheritance '("project"))
 

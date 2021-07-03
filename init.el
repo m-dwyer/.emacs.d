@@ -386,8 +386,17 @@
   :after org
   :init
   (setq org-journal-prefix-key "C-c C-j ")
+  :custom
+  (org-journal-dir md--org-journal-dir)
+  (org-journal-file-type 'weekly)
+  (org-journal-date-format "%A, %d %B %Y")
+  (org-journal-file-format "%Y-W%V.org")
   :config
-  (setq org-journal-dir md--org-journal-dir)
-  (setq org-journal-file-type 'weekly)
-  (setq org-journal-date-format "%A, %d %B %Y")
-  (setq org-journal-file-format "%Y-W%V.org"))
+  (defun md/org-journal-save-entry-and-exit()
+    "Simple convenience function.
+  Saves the buffer of the current day's entry and kills the window
+  Similar to org-capture like behavior"
+    (interactive)
+    (save-buffer)
+    (kill-buffer-and-window))
+  (define-key org-journal-mode-map (kbd "C-x C-s") 'md/org-journal-save-entry-and-exit))

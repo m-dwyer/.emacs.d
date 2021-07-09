@@ -361,3 +361,15 @@
          ((org-agenda-overriding-header "Low Effort Tasks")
           (org-agenda-max-todos 20)))
         ("W" "Work Tasks" tags-todo "+@work")))
+
+(use-package org-roam
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory org-directory)
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))

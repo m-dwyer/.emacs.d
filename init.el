@@ -252,19 +252,25 @@
   (visual-line-mode 1))
 
 (use-package org
-  :pin org ;; TODO - check
+  :ensure t
   :hook (org-mode . md/org-mode-setup)
+  :bind
+  ("C-c l" . 'org-store-link)
+  ("C-c a" . 'org-agenda)
+  ("C-c c" . 'org-capture)
+  ("C-c t" . 'org-todo)
   :config
-
   ;; My org file locations
-
-  (setq md--org-templates (expand-file-name "templates" user-emacs-directory))
-
+  (setq md--org-templates-dir (expand-file-name "templates" user-emacs-directory))
+  (setq md--org-journal-dir (expand-file-name "journal" org-directory))
+  (setq md--org-reviews-dir (expand-file-name "reviews" org-directory))
   (setq md--org-projects-dir (expand-file-name "projects" org-directory))
-  (setq md--org-project-template (expand-file-name "project.org" md--org-templates))
+
+  (setq md--org-project-template (expand-file-name "project.org" md--org-templates-dir))
+  (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
+
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
-
   (setq org-ellipsis " ▾")
 
   (setq org-agenda-start-with-log-mode t)
@@ -278,12 +284,19 @@
   (expand-file-name
    (format "%s.org" (s-dashed-words md--org-capture-project)) md--org-projects-dir))
 
+
+(defun md/get-current-review-name ()
+  (expand-file-name
+   (format "%s.org" (format-time-string "%Y-%m-%B")) md--org-reviews-dir))
+
 (setq org-capture-templates
-      `(("p" "Projects")
-        ("pp" "Project" entry (file md/get-project-name)
+      `(("p" "Project" entry (file md/get-project-name)
          (file ,md--org-project-template))
         ("t" "Task" entry (file+headline md--org-tasks "Tasks")
-         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)))
+         "* TODO %?\n %U\n %a\n %i" :empty-lines 1)
+        ("r" "Review")
+        ("rw" "Weekly Review" entry (file+olp+datetree md/get-current-review-name)
+         (file ,md--org-weekly-review-template) :tree-type week)))
 
 ;; Save org buffers after refiling
 (advice-add 'org-refile :after
@@ -337,7 +350,7 @@
 (setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")))
 
 (setq org-tags-exclude-from-inheritance '("project"))
 
@@ -361,6 +374,32 @@
          ((org-agenda-overriding-header "Low Effort Tasks")
           (org-agenda-max-todos 20)))
         ("W" "Work Tasks" tags-todo "+@work")))
+
+(use-package org-edna
+  :config
+  (require 'org-edna)
+  (org-edna-mode)
+  (setq org-edna-use-inheritance t))
+
+(use-package org-journal
+  :ensure t
+  :after org
+  :init
+  (setq org-journal-prefix-key "C-c C-j ")
+  :custom
+  (org-journal-dir md--org-journal-dir)
+  (org-journal-file-type 'weekly)
+  (org-journal-date-format "%A, %d %B %Y")
+  (org-journal-file-format "%Y-W%V.org")
+  :config
+  (defun md/org-journal-save-entry-and-exit()
+    "Simple convenience function.
+  Saves the buffer of the current day's entry and kills the window
+  Similar to org-capture like behavior"
+    (interactive)
+    (save-buffer)
+    (kill-buffer-and-window))
+  (define-key org-journal-mode-map (kbd "C-x C-s") 'md/org-journal-save-entry-and-exit))
 
 (use-package org-roam
   :hook

@@ -14,7 +14,6 @@ DEADLINE: %^t
 - [ ] Schedule next actions from tasks
 
 ** Project Overview
-
 %?
 
 ** Project  Tasks [0/2] [0%]

@@ -228,7 +228,9 @@
   (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))
+  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+  (set-face-attribute 'org-drawer nil :height 0.8)
+  (set-face-attribute 'org-special-keyword nil :height 0.8))
 
 ;; Improve the bullets
 (use-package org-bullets

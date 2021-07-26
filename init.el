@@ -229,8 +229,8 @@
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
-  (set-face-attribute 'org-drawer nil :height 0.8)
-  (set-face-attribute 'org-special-keyword nil :height 0.8))
+  (set-face-attribute 'org-drawer nil :height 0.7)
+  (set-face-attribute 'org-special-keyword nil :height 0.7))
 
 ;; Improve the bullets
 (use-package org-bullets
@@ -272,13 +272,14 @@
   (setq md--org-weekly-review-template (expand-file-name "weekly-review.org" md--org-templates-dir))
 
   (setq md--org-tasks (expand-file-name "tasks.org" org-directory))
+  (setq md--org-recurring-tasks (expand-file-name "recurring.org" org-directory))
   (setq md--org-incubate (expand-file-name "incubate.org" org-directory))
   (setq org-ellipsis " ▾")
 
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files `(,md--org-tasks ,md--org-projects-dir))
+  (setq org-agenda-files `(,md--org-tasks ,md--org-recurring-tasks ,md--org-projects-dir))
   (md/org-font-setup))
 
 (defun md/get-project-name ()
@@ -352,7 +353,9 @@
 (setq org-enforce-todo-dependencies t)
 
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "NEXT(n)" "DOING(s)" "WAIT(w)" "|" "DONE(d!)" "CANCELLED(c)")
+        (sequence "RECURRING" "|" "DONE")
+        ))
 
 (setq org-tags-exclude-from-inheritance '("project"))
 
@@ -396,8 +399,8 @@
   :config
   (defun md/org-journal-save-entry-and-exit()
     "Simple convenience function.
-  Saves the buffer of the current day's entry and kills the window
-  Similar to org-capture like behavior"
+    Saves the buffer of the current day's entry and kills the window
+    Similar to org-capture like behavior"
     (interactive)
     (save-buffer)
     (kill-buffer-and-window))
